@@ -1,2 +1,2 @@
-studyproject
-============
+archetype project
+==================
