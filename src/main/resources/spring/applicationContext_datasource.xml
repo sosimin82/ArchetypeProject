@@ -14,11 +14,15 @@
                  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
                  http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
+	<bean id="jdbcProp" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:properties/jdbc.properties" />
+	</bean>
 	
-	<context:component-scan base-package="com.op.template">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 	
-    <import resource="applicationContext_datasource.xml"/>
-    <import resource="applicationContext_dao_config.xml"/>
 </beans>

@@ -10,6 +10,16 @@
 	<!-- To enable JMX Management -->
 	<jmxConfigurator />
 
+	<!-- 특정 유저의 사번을 설정해 두면 해당 유저의 log를 debug level로 출력해 볼 수 있다. -->
+	<turboFilter class="ch.qos.logback.classic.turbo.DynamicThresholdFilter">
+		<Key>userNo</Key>
+		<DefaultThreshold>INFO</DefaultThreshold>
+		<MDCValueLevelPair>
+			<value>admin</value>
+			<level>DEBUG</level>
+		</MDCValueLevelPair>
+	</turboFilter>
+
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n

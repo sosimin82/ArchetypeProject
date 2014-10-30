@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:mvc="http://www.springframework.org/schema/mvc"
+         xmlns:security="http://www.springframework.org/schema/security"
+         xmlns:aop="http://www.springframework.org/schema/aop"
+         xmlns:cache="http://www.springframework.org/schema/cache"
+         xsi:schemaLocation="
+                 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                 http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                 http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- Transaction manager for a single JDBC DataSource -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+	
+  	<!-- SqlsessionFactory setup for MyBatis Database Layer -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <!-- mybatis 기본설정 -->
+        <property name="configLocation" value="classpath:spring/mybatis-config.xml"/>
+
+        <!-- typeAliases -->
+        <property name="typeAliases">
+            <list>
+                <!-- alias명은 @Alias.로 설정 없을 경우 Calass.getName으로 등록됨-->
+                <value>com.op.template.model.SampleContents</value>
+            </list>
+        </property>
+
+        <!-- mapper 의 위치를 설정한다. -->
+        <property name="mapperLocations" value="classpath:/db/mapper/*Mapper.xml"/>
+        
+        
+        <!-- statement 선언의 오류를 좀 더 빠르게 파악하기 위해서 true로 설정 -->
+        <property name="failFast" value="true"/>
+
+    </bean>
+    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+	
+</beans>

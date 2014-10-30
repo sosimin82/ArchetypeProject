@@ -6,7 +6,7 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath:spring/applicationContext.xml</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -20,7 +20,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:servlet-context.xml</param-value>
+			<param-value>classpath:spring/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -30,10 +30,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<servlet-mapping>
-		<servlet-name>default</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
 
     <filter>
       <filter-name>encodingFilter</filter-name>
@@ -48,6 +44,17 @@
       <url-pattern>/*</url-pattern>
     </filter-mapping>
     
+    <!-- Rest api 를 사용하기 위한 filter 선언(http method: post, get, put, delete 를 사용하기 위함) -->
+  	<filter>
+      <filter-name>httpMethodFilter</filter-name>
+   	  <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  	</filter>
+    <filter-mapping>
+      <filter-name>httpMethodFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+  	</filter-mapping>
+    
+    <!-- 
     <filter>
       <filter-name>springSecurityFilterChain</filter-name>
       <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -56,4 +63,6 @@
       <filter-name>springSecurityFilterChain</filter-name>
       <url-pattern>/*</url-pattern>
     </filter-mapping>
+     -->
+     
 </web-app>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!-- default 옵션을 설정한다. -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+
+        <!-- insert구문 사용시 GENERATED_KEYS 기능을 사용해야 한다면 true로 설정 기본값: false
+             insert시 자동생성된 key를 추가 sql없이 얻을수 있음..
+        -->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!-- mybatis 의 defaultExecutorType를 설정한다 기본값 : SIMPLE-->
+        <!-- dbcp에서 preparedStatement cache 를 수행하므로 REUSE를 사용할 필요는 없음. -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+
+        <!--defaultQueryTiemout을 설정한다. 초단위 -->
+        <setting name="defaultStatementTimeout" value="5"/>
+    </settings>
+
+</configuration>

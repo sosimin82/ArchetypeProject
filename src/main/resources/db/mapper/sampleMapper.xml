@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.op.template.dao.SampleDao">
+
+<!-- 
+::::  sample table 생성 ddl :::::::::::::::::::::::::::::::::::::::
+
+::::  cubrid
+CREATE TABLE sample_tb (
+     seq INTEGER AUTO_INCREMENT(1, 1)
+     , msg VARCHAR(1000)
+     , CONSTRAINT pk PRIMARY KEY(seq)
+)
+
+:::: oracle
+* table
+CREATE TABLE sample_tb ( 
+     seq NUMERIC 
+     , msg VARCHAR2(1000) 
+     , CONSTRAINT pk PRIMARY KEY(seq) 
+) 
+
+* sequence
+CREATE SEQUENCE sample_seq 
+INCREMENT BY 1 
+START WITH 1
+NOMAXVALUE 
+NOCYCLE 
+CACHE 10
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+-->
+	<!-- sample sqls  -->
+    <select id="selectTest" resultType="String">
+		SELECT 'This is Data from DB' as msg
+		<!-- oracle -->
+		FROM dual
+	</select>
+
+	<select id="selectMsgList" resultType="sampleContents">
+		SELECT seq
+		     , msg
+		  FROM sample_tb
+	</select>
+	
+    <select id="selectMsg" resultType="sampleContents" parameterType="int">
+		SELECT seq
+		     , msg
+		  FROM sample_tb
+		 WHERE seq = #{seq}
+	</select>
+	
+	<insert id="insertMsg" parameterType="sampleContents">
+	<!-- cubrid query -->
+	<!-- 
+	   INSERT INTO sample_tb (
+	        msg
+	        ) 
+	   VALUES (
+	        #{msg}
+	   )
+	-->
+	<!-- oracle query -->
+	   INSERT INTO sample_tb (
+	         seq
+	       , msg
+	       )
+	   VALUES (
+	        sample_seq.nextVal
+	        , #{msg}
+	   )	
+	</insert>
+	
+	<update id="updateMsg" parameterType="sampleContents">
+	   UPDATE sample_tb
+	      SET msg = #{msg}
+	    WHERE seq = #{seq}
+	</update>
+	
+	<delete id="deleteMsg" parameterType="int">
+	   DELETE FROM sample_tb
+	    WHERE seq = #{seq}
+	</delete>
+	
+	<insert id="testInsertMsg" parameterType="sampleContents">
+	   INSERT INTO sample_tb (
+	        seq, 
+	        msg
+	        ) 
+	   VALUES (
+	        #{seq}, 
+	        #{msg}
+	   )
+	</insert>
+	
+</mapper>

@@ -16,6 +16,9 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- js, css, img 등의 요청이 들어왔을때 처리하기 위해 선언 -->
+	<mvc:default-servlet-handler/>
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.op.template">
@@ -25,15 +28,37 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/view directory -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	
+	<!-- log level을 조정하기 위한 interceptor(user가 admin 일 경우 로그 레벨 변경) -->
+	<import resource="servlet-context-log.xml"/>
+	
+	
+	<!-- REST API -->    
+    <import resource="servlet-context-rest.xml"/>
+	
 	
 	<!-- AOP를 이용하기 위한 설정 -->
 	<aop:aspectj-autoproxy />
 	
 	
+	<!-- Spring MVC 다국어 설정을 지원하기 위한 MessageSource 선언 -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="properties/messages/Messages"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+    
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+	
+	<mvc:interceptors>
+       <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+         <property name="paramName" value="lang" />
+       </bean>
+    </mvc:interceptors>
 	
 </beans>
