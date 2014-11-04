@@ -15,38 +15,26 @@
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 
-
-	<!-- nBase-ARC 설정 -->
-	<bean id="gatewayConfig" class="com.nhncorp.redis.cluster.gateway.GatewayConfig">
-	    <property name="zkAddress" value="dev.mnbasearc.nhnent.com:2181"/>
-	    <property name="clusterName" value="nhn_ent_archtype"/>
-	</bean>
-	
-	<bean id="gatewayClient" class="com.nhncorp.redis.cluster.gateway.GatewayClient" destroy-method="destroy">
-	    <constructor-arg ref="gatewayConfig"/>
-	</bean>
-	
-	<bean id="redisClusterConnectionFactory" class="com.nhncorp.redis.cluster.spring.RedisClusterConnectionFactory" destroy-method="destroy">
-        <property name="config" ref="gatewayConfig" />
+    <!-- Jedis ConnectionFactory -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+	    <property name="hostName" value="localhost"/>
+	    <property name="port" value="6379"/>
+	    <property name="usePool" value="true" />    
     </bean>
     
     <bean id="redisJdkSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
     
-	<bean id="redisTemplate" class="com.nhncorp.redis.cluster.spring.RedisClusterTemplate">
-        <property name="connectionFactory" ref="redisClusterConnectionFactory"/>
-        <property name="keySerializer" ref="redisJdkSerializer" />
-        <property name="valueSerializer" ref="redisJdkSerializer" />
-        <property name="hashKeySerializer" ref="redisJdkSerializer" />
-        <property name="hashValueSerializer" ref="redisJdkSerializer" />
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+      	<property name="connectionFactory" ref="jedisConnectionFactory" />
+      	<property name="defaultSerializer" ref="redisJdkSerializer"/>
     </bean>
     
     <!-- turn on declarative caching -->
     <cache:annotation-driven />
  
     <!-- declare Redis Cache Manager -->
-    <bean id="cacheManager" class="com.nhnent.template.cache.NBaseArcCacheManager">
-        <constructor-arg ref="redisTemplate" index="0"/>
-        <constructor-arg value="300" index="1"/>
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" >
+        <constructor-arg ref="redisTemplate"/>
     </bean>
     
 </beans>

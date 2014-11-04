@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.op.template.model.SampleContents;
 import com.op.template.service.SampleService;
-//import com.op.template.util.NBaseArcMap;
 
 @Controller
 public class SampleController {
@@ -21,9 +20,6 @@ public class SampleController {
 	
 	@Autowired 
 	private SampleService sampleService;
-	
-//	@Autowired
-//	private NBaseArcMap nBaseArcMap;
 	
 	/**
 	 * 메인화면 메서드
@@ -149,31 +145,5 @@ public class SampleController {
 		model.addAttribute("contentsList", sampleService.getSampleContentsList());
 		return "list";
 	}
-	
-//	/**
-//	 * nBase-ARC 에 값을 조회할 수 있는 메서드(key: msg)
-//	 * @return String
-//	 * 
-//	 * */
-//	@RequestMapping(value = "/check-nbase-arc", method = RequestMethod.GET)
-//	public String checkCache(Model model) {
-//		model.addAttribute("msg", nBaseArcMap.getValueFromNBaseArc("msg"));
-//		return "nbaseArc";
-//	}
-//	
-//	/**
-//	 * nBase-ARC 에 값을 저장할 수 있는 메서드(key: msg)
-//	 * @return String
-//	 * 
-//	 * */
-//	@RequestMapping(value = "/nbase-arc", method = RequestMethod.GET)
-//	public String setCache(Model model) {
-//		String msg = "This is Saved Data in nBase-ARC";
-//		nBaseArcMap.setValueToNBaseArc("msg", msg, 10);
-//		model.addAttribute("msg", nBaseArcMap.getValueFromNBaseArc("msg"));
-//		
-//		return "nbaseArc";
-//	}
-	
 	
 }

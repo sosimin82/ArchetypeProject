@@ -4,9 +4,6 @@ import java.util.List;
 
 import com.op.template.model.SampleContents;
 
-/**
- * @author NHNEnt
- */
 public interface SampleService {
 	String doDbTest();
 	

@@ -12,8 +12,7 @@
 <a href="/rest/contents-list" class="N=a:archetype.rest_list"><spring:message code="top.list_rest"/></a> | 
 <a href="#" id="pop_list" class="N=a:archetype.rest_pop"> <spring:message code="top.json_list"/> </a>|  
 <a href="/write-view" class="N=a:archetype_view"> <spring:message code="top.write"/> </a> | 
-<a href="/rest/write-view" class="N=a:archetype.write_view"> <spring:message code="top.write_rest"/> </a> | 
-<a href="/check-nbase-arc" class="N=a:archetype.nBase_arc"> <spring:message code="top.nbase_arc"/> </a>
+<a href="/rest/write-view" class="N=a:archetype.write_view"> <spring:message code="top.write_rest"/> </a> 
 &nbsp;
 <select name="lang">
    <option value=""><spring:message code="top.select"/></option>

@@ -7,26 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.op.template.dao.SampleDao;
 import com.op.template.model.SampleContents;
-//import com.op.template.util.NBaseArcMap;
 
-/**
- * @author NHNEnt
- */
 @Service
 public class SampleServiceImpl implements SampleService {
 	@Autowired 
 	SampleDao sampleDao;
 	
-//	@Autowired
-//	NBaseArcMap nbaseArcCache;
 
 
 	public String doDbTest() {
-//		if (nbaseArcCache.hasValueForKey("msg")) {
-//			return (String)nbaseArcCache.getValueFromNBaseArc("msg");
-//		} else {
-			return sampleDao.testDbSelect();
-//		}
+		return sampleDao.testDbSelect();
 	}
 
 	public List<SampleContents> getSampleContentsList() {

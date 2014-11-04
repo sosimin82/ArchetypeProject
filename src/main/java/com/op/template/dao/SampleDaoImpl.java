@@ -17,8 +17,7 @@ import com.op.template.model.SampleContents;
 public class SampleDaoImpl implements SampleDao {
 	private static final String NAMESPACE = SampleDaoImpl.class.getPackage().getName() + ".SampleDao.";
 	
-	@SuppressWarnings("unused")
-	private Logger logger = (Logger) LoggerFactory.getLogger(getClass());
+	private static Logger LOGGER = (Logger) LoggerFactory.getLogger(SampleDaoImpl.class);
 	
     @Autowired
     @Qualifier("sqlSessionTemplate")
@@ -30,6 +29,7 @@ public class SampleDaoImpl implements SampleDao {
 
 	@Cacheable(value = "test")
 	public SampleContents selectSampleContents(int seq) {
+		LOGGER.info("this is db data");
 		return sqlSessionTemplate.selectOne(NAMESPACE + "selectMsg", seq);
 	}
 	

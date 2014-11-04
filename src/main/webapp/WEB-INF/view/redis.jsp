@@ -15,7 +15,7 @@
 
 <%@ include file="/WEB-INF/view/top.jsp" %>
 
-  Saved Data : ${msg} <input type="button" value="put data into nBase-ARC" onClick="javascript:location.href='nbase-arc'"/>
+  Saved Data : ${msg} <input type="button" value="put data into Redis" onClick="javascript:location.href='redis'"/>
  
 <%@ include file="/WEB-INF/view/bottom.jsp" %>
 

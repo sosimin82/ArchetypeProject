@@ -41,6 +41,10 @@
 	
 	<!-- REST API -->    
     <import resource="servlet-context-rest.xml"/>
+    
+    
+	<!-- redis cache -->    
+    <import resource="servlet-context-cache.xml"/>
 	
 	
 	<!-- AOP를 이용하기 위한 설정 -->
