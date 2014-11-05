@@ -17,7 +17,7 @@ import com.op.template.model.SampleContents;
 public class SampleValidationCheckAspect {
 	private static final Logger LOGGER = (Logger) LoggerFactory.getLogger(SampleValidationCheckAspect.class);
 	
-	@Pointcut("within(com.nhnent.template.mvc.controller.*)")
+	@Pointcut("within(com.op.template.mvc.controller.*)")
 	public void samplePointCutSignature() { }
 	
 	/**
