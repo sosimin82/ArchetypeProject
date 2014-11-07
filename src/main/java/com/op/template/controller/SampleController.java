@@ -28,7 +28,7 @@ public class SampleController {
 	 * */
 	@RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
 	public String testMain(Model model) {
-		// Log level 확인  (url뒤에 userNo를 넘기면 Log level이 바뀝니다.  -> userNo=NE11111)\
+		// Log level 확인  (url뒤에 userNo를 넘기면 Log level이 바뀝니다.  -> userNo=admin)
 		LOGGER.debug("testMain: log level test: default=[info] ");
 		LOGGER.debug("debug");
 		LOGGER.info("info");
