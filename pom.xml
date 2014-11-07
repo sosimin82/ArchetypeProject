@@ -249,16 +249,11 @@
                 <artifactId>maven-eclipse-plugin</artifactId>
                 <version>${maven-eclipse-plugin.version}</version>
                 <configuration>
-                    <additionalProjectnatures>
-                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-                    </additionalProjectnatures>
-                    <additionalBuildcommands>
-                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
+				<configuration>
+					<useProjectReferences>false</useProjectReferences>
 					<wtpContextName>/</wtpContextName>
 					<wtpversion>${wtpversion}</wtpversion>
+				</configuration>
                 </configuration>
             </plugin>
             <plugin>
